@@ -12,8 +12,8 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/stainless-sdks/luma-agents-cli/internal/autocomplete"
-	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
+	"github.com/lumalabs/luma-agents-cli/internal/autocomplete"
+	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
 	docs "github.com/urfave/cli-docs/v3"
 	"github.com/urfave/cli/v3"
 )
@@ -25,8 +25,8 @@ var (
 
 func init() {
 	Command = &cli.Command{
-		Name:      "luma-agents",
-		Usage:     "CLI for the luma-agents API",
+		Name:      "luma-agents-cli",
+		Usage:     "CLI for the luma API",
 		Suggest:   true,
 		Version:   Version,
 		ErrWriter: &CommandErrorBuffer,
@@ -74,62 +74,28 @@ func init() {
 				Usage: "The GJSON transformation for errors.",
 			},
 			&requestflag.Flag[string]{
-				Name:    "api-key",
-				Sources: cli.EnvVars("PETSTORE_API_KEY"),
+				Name:    "auth-token",
+				Sources: cli.EnvVars("LUMA_AGENTS_API_KEY"),
+			},
+			&cli.StringFlag{
+				Name:  "environment",
+				Usage: "Set the environment for API requests",
 			},
 		},
 		Commands: []*cli.Command{
 			{
-				Name:     "pets",
+				Name:     "generations",
 				Category: "API RESOURCE",
 				Suggest:  true,
 				Commands: []*cli.Command{
-					&petsCreate,
-					&petsRetrieve,
-					&petsUpdate,
-					&petsDelete,
-					&petsFindByStatus,
-					&petsFindByTags,
-					&petsUpdateByID,
-					&petsUploadImage,
-				},
-			},
-			{
-				Name:     "store",
-				Category: "API RESOURCE",
-				Suggest:  true,
-				Commands: []*cli.Command{
-					&storeListInventory,
-				},
-			},
-			{
-				Name:     "store:orders",
-				Category: "API RESOURCE",
-				Suggest:  true,
-				Commands: []*cli.Command{
-					&storeOrdersCreate,
-					&storeOrdersRetrieve,
-					&storeOrdersDelete,
-				},
-			},
-			{
-				Name:     "users",
-				Category: "API RESOURCE",
-				Suggest:  true,
-				Commands: []*cli.Command{
-					&usersCreate,
-					&usersRetrieve,
-					&usersUpdate,
-					&usersDelete,
-					&usersCreateWithList,
-					&usersLogin,
-					&usersLogout,
+					&generationsCreate,
+					&generationsGet,
 				},
 			},
 			{
 				Name:            "@manpages",
 				Usage:           "Generate documentation for 'man'",
-				UsageText:       "luma-agents @manpages [-o luma-agents.1] [--gzip]",
+				UsageText:       "luma-agents-cli @manpages [-o luma-agents-cli.1] [--gzip]",
 				Hidden:          true,
 				Action:          generateManpages,
 				HideHelpCommand: true,
@@ -182,7 +148,7 @@ func generateManpages(ctx context.Context, c *cli.Command) error {
 		// handle error
 	}
 	if c.Bool("text") {
-		file, err := os.Create(filepath.Join(dir, "man1", "luma-agents.1"))
+		file, err := os.Create(filepath.Join(dir, "man1", "luma-agents-cli.1"))
 		if err != nil {
 			return err
 		}
@@ -192,7 +158,7 @@ func generateManpages(ctx context.Context, c *cli.Command) error {
 		}
 	}
 	if c.Bool("gzip") {
-		file, err := os.Create(filepath.Join(dir, "man1", "luma-agents.1.gz"))
+		file, err := os.Create(filepath.Join(dir, "man1", "luma-agents-cli.1.gz"))
 		if err != nil {
 			return err
 		}

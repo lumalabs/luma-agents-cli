@@ -10,8 +10,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/stainless-sdks/luma-agents-cli/pkg/cmd"
-	"github.com/stainless-sdks/luma-agents-go"
+	"github.com/lumalabs/luma-agents-cli/pkg/cmd"
+	"github.com/lumalabs/luma-agents-go"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
@@ -23,8 +23,8 @@ func main() {
 		prepareForAutocomplete(app)
 	}
 
-	if baseURL, ok := os.LookupEnv("LUMA_AGENTS_BASE_URL"); ok {
-		if err := cmd.ValidateBaseURL(baseURL, "LUMA_AGENTS_BASE_URL"); err != nil {
+	if baseURL, ok := os.LookupEnv("LUMA_BASE_URL"); ok {
+		if err := cmd.ValidateBaseURL(baseURL, "LUMA_BASE_URL"); err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 			os.Exit(1)
 		}
@@ -42,7 +42,7 @@ func main() {
 		if errors.As(err, &apierr) {
 			fmt.Fprintf(os.Stderr, "%s %q: %d %s\n", apierr.Request.Method, apierr.Request.URL, apierr.Response.StatusCode, http.StatusText(apierr.Response.StatusCode))
 			format := app.String("format-error")
-			json := gjson.Parse(apierr.RawJSON())
+			json := gjson.Parse(apierr.JSON.RawJSON())
 			show_err := cmd.ShowJSON(os.Stdout, "Error", json, format, app.String("transform-error"))
 			if show_err != nil {
 				// Just print the original error:

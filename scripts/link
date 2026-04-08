@@ -5,9 +5,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 # Mark the necessary Go modules as private to avoid Go's proxy
-export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}github.com/stainless-sdks/luma-agents-go"
+export GOPRIVATE="${GOPRIVATE:+$GOPRIVATE,}github.com/lumalabs/luma-agents-go,github.com/stainless-sdks/luma-agents-go"
 
-REPLACEMENT="${1:-"../luma-agents-go"}"
+REPLACEMENT="${1:-"../luma-go"}"
 echo "==> Replacing Go SDK with $REPLACEMENT"
-go mod edit -replace github.com/stainless-sdks/luma-agents-go="$REPLACEMENT"
+go mod edit -replace github.com/lumalabs/luma-agents-go="$REPLACEMENT"
 go mod tidy -e
