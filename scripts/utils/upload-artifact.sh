@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
-BINARY_NAME="luma-agents"
+BINARY_NAME="luma-agents-cli"
 DIST_DIR="dist"
 FILENAME="dist.zip"
 

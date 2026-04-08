@@ -16,8 +16,8 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/stainless-sdks/luma-agents-cli/internal/jsonview"
-	"github.com/stainless-sdks/luma-agents-go/option"
+	"github.com/lumalabs/luma-agents-cli/internal/jsonview"
+	"github.com/lumalabs/luma-agents-go/option"
 
 	"github.com/charmbracelet/x/term"
 	"github.com/itchyny/json2yaml"
@@ -40,19 +40,31 @@ func ValidateBaseURL(value, source string) error {
 
 func getDefaultRequestOptions(cmd *cli.Command) []option.RequestOption {
 	opts := []option.RequestOption{
-		option.WithHeader("User-Agent", fmt.Sprintf("LumaAgents/CLI %s", Version)),
+		option.WithHeader("User-Agent", fmt.Sprintf("Luma/CLI %s", Version)),
 		option.WithHeader("X-Stainless-Lang", "cli"),
 		option.WithHeader("X-Stainless-Package-Version", Version),
 		option.WithHeader("X-Stainless-Runtime", "cli"),
 		option.WithHeader("X-Stainless-CLI-Command", cmd.FullName()),
 	}
-	if cmd.IsSet("api-key") {
-		opts = append(opts, option.WithAPIKey(cmd.String("api-key")))
+	if cmd.IsSet("auth-token") {
+		opts = append(opts, option.WithAuthToken(cmd.String("auth-token")))
 	}
 
 	// Override base URL if the --base-url flag is provided
 	if baseURL := cmd.String("base-url"); baseURL != "" {
 		opts = append(opts, option.WithBaseURL(baseURL))
+	}
+
+	// Set environment if the --environment flag is provided
+	if environment := cmd.String("environment"); environment != "" {
+		switch environment {
+		case "production":
+			opts = append(opts, option.WithEnvironmentProduction())
+		case "staging":
+			opts = append(opts, option.WithEnvironmentStaging())
+		default:
+			log.Fatalf("Unknown environment: %s. Valid environments are %s", environment, "production, staging")
+		}
 	}
 
 	return opts

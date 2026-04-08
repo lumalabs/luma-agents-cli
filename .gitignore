@@ -1,5 +1,5 @@
 .prism.log
 .stdy.log
 dist/
-/luma-agents
+/luma-agents-cli
 *.exe

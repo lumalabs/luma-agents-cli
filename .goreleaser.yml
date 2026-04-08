@@ -1,20 +1,20 @@
-project_name: luma-agents
+project_name: luma-agents-cli
 version: 2
 
 before:
   hooks:
     - mkdir -p completions
-    - sh -c "go run ./cmd/luma-agents/main.go @completion bash > completions/luma-agents.bash"
-    - sh -c "go run ./cmd/luma-agents/main.go @completion zsh > completions/luma-agents.zsh"
-    - sh -c "go run ./cmd/luma-agents/main.go @completion fish > completions/luma-agents.fish"
-    - sh -c "go run ./cmd/luma-agents/main.go @manpages -o man"
+    - sh -c "go run ./cmd/luma-agents-cli/main.go @completion bash > completions/luma-agents-cli.bash"
+    - sh -c "go run ./cmd/luma-agents-cli/main.go @completion zsh > completions/luma-agents-cli.zsh"
+    - sh -c "go run ./cmd/luma-agents-cli/main.go @completion fish > completions/luma-agents-cli.fish"
+    - sh -c "go run ./cmd/luma-agents-cli/main.go @manpages -o man"
 
 builds:
   - id: macos
     goos: [darwin]
     goarch: [amd64, arm64]
     binary: '{{ .ProjectName }}'
-    main: ./cmd/luma-agents/main.go
+    main: ./cmd/luma-agents-cli/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
@@ -25,7 +25,7 @@ builds:
     env:
       - CGO_ENABLED=0
     binary: '{{ .ProjectName }}'
-    main: ./cmd/luma-agents/main.go
+    main: ./cmd/luma-agents-cli/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
@@ -34,7 +34,7 @@ builds:
     goos: [windows]
     goarch: ['386', amd64, arm64]
     binary: '{{ .ProjectName }}'
-    main: ./cmd/luma-agents/main.go
+    main: ./cmd/luma-agents-cli/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
@@ -67,7 +67,7 @@ snapshot:
 
 nfpms:
   - license: Apache-2.0
-    maintainer: 
+    maintainer: support+luma-agents@lumalabs.ai
     bindir: /usr
     formats:
       - apk

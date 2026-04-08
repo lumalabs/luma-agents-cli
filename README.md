@@ -1,8 +1,8 @@
-# Luma Agents CLI
+# Luma CLI
 
-The official CLI for the Luma Agents REST API.
+The official CLI for the [Luma REST API](https://luma-agents.stldocs.app).
 
-It is generated with [Stainless](https://www.stainless.com/).
+<!-- x-release-please-start-version -->
 
 ## Installation
 
@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 To test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.
 
 ```sh
-go install 'github.com/stainless-sdks/luma-agents-cli/cmd/luma-agents@latest'
+go install 'github.com/lumalabs/luma-agents-cli/cmd/luma-agents-cli@latest'
 ```
 
 Once you have run `go install`, the binary is placed in your Go bin directory:
@@ -25,6 +25,8 @@ If commands aren't found after installation, add the Go bin directory to your PA
 # Add to your shell profile (.zshrc, .bashrc, etc.)
 export PATH="$PATH:$(go env GOPATH)/bin"
 ```
+
+<!-- x-release-please-end -->
 
 ### Running Locally
 
@@ -40,28 +42,28 @@ After cloning the git repository for this project, you can use the
 The CLI follows a resource-based command structure:
 
 ```sh
-luma-agents [resource] <command> [flags...]
+luma-agents-cli [resource] <command> [flags...]
 ```
 
 ```sh
-luma-agents store:orders create \
-  --api-key 'My API Key' \
-  --pet-id 1 \
-  --quantity 1 \
-  --status placed
+luma-agents-cli generations create \
+  --auth-token 'My Auth Token' \
+  --prompt 'A glass of iced coffee on a marble countertop, morning light streaming through a window' \
+  --aspect-ratio 16:9 \
+  --model uni-1
 ```
 
 For details about specific commands, use the `--help` flag.
 
 ### Environment variables
 
-| Environment variable | Required |
-| -------------------- | -------- |
-| `PETSTORE_API_KEY`   | yes      |
+| Environment variable  | Required |
+| --------------------- | -------- |
+| `LUMA_AGENTS_API_KEY` | yes      |
 
 ### Global flags
 
-- `--api-key` (can also be set with `PETSTORE_API_KEY` env var)
+- `--auth-token` (can also be set with `LUMA_AGENTS_API_KEY` env var)
 - `--help` - Show command line usage
 - `--debug` - Enable debug logging (includes HTTP request/response details)
 - `--version`, `-v` - Show the CLI version
@@ -76,15 +78,15 @@ For details about specific commands, use the `--help` flag.
 To pass files to your API, you can use the `@myfile.ext` syntax:
 
 ```bash
-luma-agents <command> --arg @abe.jpg
+luma-agents-cli <command> --arg @abe.jpg
 ```
 
 Files can also be passed inside JSON or YAML blobs:
 
 ```bash
-luma-agents <command> --arg '{image: "@abe.jpg"}'
+luma-agents-cli <command> --arg '{image: "@abe.jpg"}'
 # Equivalent:
-luma-agents <command> <<YAML
+luma-agents-cli <command> <<YAML
 arg:
   image: "@abe.jpg"
 YAML
@@ -94,7 +96,7 @@ If you need to pass a string literal that begins with an `@` sign, you can
 escape the `@` sign to avoid accidentally passing a file.
 
 ```bash
-luma-agents <command> --username '\@abe'
+luma-agents-cli <command> --username '\@abe'
 ```
 
 #### Explicit encoding
@@ -108,5 +110,5 @@ base64-encoding). Note that absolute paths will begin with `@file://` or
 `@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).
 
 ```bash
-luma-agents <command> --arg @data://file.txt
+luma-agents-cli <command> --arg @data://file.txt
 ```
