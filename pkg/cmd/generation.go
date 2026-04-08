@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/lumalabs/luma-agents-cli/internal/apiquery"
-	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
-	"github.com/lumalabs/luma-agents-go"
-	"github.com/lumalabs/luma-agents-go/option"
+	"github.com/stainless-sdks/luma-agents-cli/internal/apiquery"
+	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
+	"github.com/stainless-sdks/luma-agents-go"
+	"github.com/stainless-sdks/luma-agents-go/option"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )

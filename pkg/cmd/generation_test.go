@@ -5,8 +5,8 @@ package cmd
 import (
 	"testing"
 
-	"github.com/lumalabs/luma-agents-cli/internal/mocktest"
-	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
+	"github.com/stainless-sdks/luma-agents-cli/internal/mocktest"
+	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
 )
 
 func TestGenerationsCreate(t *testing.T) {
