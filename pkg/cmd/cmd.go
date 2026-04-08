@@ -12,8 +12,8 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/lumalabs/luma-agents-cli/internal/autocomplete"
-	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
+	"github.com/stainless-sdks/luma-agents-cli/internal/autocomplete"
+	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
 	docs "github.com/urfave/cli-docs/v3"
 	"github.com/urfave/cli/v3"
 )
