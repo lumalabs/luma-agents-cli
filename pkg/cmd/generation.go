@@ -47,7 +47,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Usage:    "Output image format",
 			BodyPath: "output_format",
 		},
-		&requestflag.Flag[any]{
+		&requestflag.Flag[map[string]any]{
 			Name:     "source",
 			Usage:    "Reference image for guided generation. Provide either url or inline base64 data (not both).",
 			BodyPath: "source",
