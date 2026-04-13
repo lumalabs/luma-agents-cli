@@ -33,7 +33,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[[]map[string]any]{
 			Name:     "image-ref",
-			Usage:    "Up to 8 reference images for style/content guidance",
+			Usage:    "Reference images for style/content guidance. Up to 8 reference images.",
 			BodyPath: "image_ref",
 		},
 		&requestflag.Flag[string]{
