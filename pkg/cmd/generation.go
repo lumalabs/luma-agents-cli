@@ -154,8 +154,9 @@ func handleGenerationsCreate(ctx context.Context, cmd *cli.Command) error {
 
 	obj := gjson.ParseBytes(res)
 	format := cmd.Root().String("format")
+	explicitFormat := cmd.Root().IsSet("format")
 	transform := cmd.Root().String("transform")
-	return ShowJSON(os.Stdout, "generations create", obj, format, transform)
+	return ShowJSON(os.Stdout, os.Stderr, "generations create", obj, format, explicitFormat, transform)
 }
 
 func handleGenerationsGet(ctx context.Context, cmd *cli.Command) error {
@@ -189,6 +190,7 @@ func handleGenerationsGet(ctx context.Context, cmd *cli.Command) error {
 
 	obj := gjson.ParseBytes(res)
 	format := cmd.Root().String("format")
+	explicitFormat := cmd.Root().IsSet("format")
 	transform := cmd.Root().String("transform")
-	return ShowJSON(os.Stdout, "generations get", obj, format, transform)
+	return ShowJSON(os.Stdout, os.Stderr, "generations get", obj, format, explicitFormat, transform)
 }
