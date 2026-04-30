@@ -115,8 +115,9 @@ var generationsGet = cli.Command{
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[string]{
-			Name:     "generation-id",
-			Required: true,
+			Name:      "generation-id",
+			Required:  true,
+			PathParam: "generation_id",
 		},
 	},
 	Action:          handleGenerationsGet,
@@ -131,8 +132,6 @@ func handleGenerationsCreate(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("Unexpected extra arguments: %v", unusedArgs)
 	}
 
-	params := lumaagents.GenerationNewParams{}
-
 	options, err := flagOptions(
 		cmd,
 		apiquery.NestedQueryFormatBrackets,
@@ -143,6 +142,8 @@ func handleGenerationsCreate(ctx context.Context, cmd *cli.Command) error {
 	if err != nil {
 		return err
 	}
+
+	params := lumaagents.GenerationNewParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
