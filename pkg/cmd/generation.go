@@ -25,7 +25,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Required: true,
 			BodyPath: "prompt",
 		},
-		&requestflag.Flag[any]{
+		&requestflag.Flag[*string]{
 			Name:     "aspect-ratio",
 			Usage:    "Output aspect ratio",
 			BodyPath: "aspect_ratio",
@@ -41,7 +41,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Default:  "uni-1",
 			BodyPath: "model",
 		},
-		&requestflag.Flag[any]{
+		&requestflag.Flag[*string]{
 			Name:     "output-format",
 			Usage:    "Output image format",
 			BodyPath: "output_format",
@@ -74,34 +74,34 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 	HideHelpCommand: true,
 }, map[string][]requestflag.HasOuterFlag{
 	"image-ref": {
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "image-ref.data",
 			Usage:      "Base64-encoded image data",
 			InnerField: "data",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "image-ref.media-type",
 			Usage:      "MIME type (e.g. image/jpeg). Required with data.",
 			InnerField: "media_type",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "image-ref.url",
 			Usage:      "Publicly accessible image URL",
 			InnerField: "url",
 		},
 	},
 	"source": {
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "source.data",
 			Usage:      "Base64-encoded image data",
 			InnerField: "data",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "source.media-type",
 			Usage:      "MIME type (e.g. image/jpeg). Required with data.",
 			InnerField: "media_type",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[*string]{
 			Name:       "source.url",
 			Usage:      "Publicly accessible image URL",
 			InnerField: "url",
