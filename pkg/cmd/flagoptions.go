@@ -16,11 +16,11 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/lumalabs/luma-agents-cli/internal/apiform"
-	"github.com/lumalabs/luma-agents-cli/internal/apiquery"
-	"github.com/lumalabs/luma-agents-cli/internal/debugmiddleware"
-	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
-	"github.com/lumalabs/luma-agents-go/option"
+	"github.com/stainless-sdks/luma-agents-cli/internal/apiform"
+	"github.com/stainless-sdks/luma-agents-cli/internal/apiquery"
+	"github.com/stainless-sdks/luma-agents-cli/internal/debugmiddleware"
+	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
+	"github.com/stainless-sdks/luma-agents-go/option"
 
 	"github.com/goccy/go-yaml"
 	"github.com/urfave/cli/v3"

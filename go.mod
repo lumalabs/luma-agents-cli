@@ -1,4 +1,4 @@
-module github.com/lumalabs/luma-agents-cli
+module github.com/stainless-sdks/luma-agents-cli
 
 go 1.25
 
