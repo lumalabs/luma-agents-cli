@@ -18,7 +18,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--prompt", "A glass of iced coffee on a marble countertop, morning light streaming through a window",
 			"--aspect-ratio", "3:1",
 			"--image-ref", "{data: data, media_type: media_type, url: url}",
-			"--model", "model",
+			"--model", "uni-1",
 			"--output-format", "png",
 			"--source", "{data: data, media_type: media_type, url: url}",
 			"--style", "auto",
@@ -42,7 +42,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--image-ref.data", "data",
 			"--image-ref.media-type", "media_type",
 			"--image-ref.url", "url",
-			"--model", "model",
+			"--model", "uni-1",
 			"--output-format", "png",
 			"--source.data", "data",
 			"--source.media-type", "media_type",
@@ -65,7 +65,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"  - data: data\n" +
 			"    media_type: media_type\n" +
 			"    url: url\n" +
-			"model: model\n" +
+			"model: uni-1\n" +
 			"output_format: png\n" +
 			"source:\n" +
 			"  data: data\n" +
