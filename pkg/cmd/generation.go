@@ -63,6 +63,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Default:  "image",
 			BodyPath: "type",
 		},
+		&requestflag.Flag[*string]{
+			Name:     "user-id",
+			Usage:    "Your end-user's stable opaque identifier (no PII). Forwarded to upstream model providers as their per-user tagging field so trust & safety violations can be attributed to a specific end-user rather than the whole API account. Also used for per-end-user usage breakdowns in /v1/usage. Strongly recommended for partner integrations.",
+			BodyPath: "user_id",
+		},
 		&requestflag.Flag[bool]{
 			Name:     "web-search",
 			Usage:    "Enable web search grounding — the agent can search the web and download reference images before generating.",
