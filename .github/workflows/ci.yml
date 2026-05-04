@@ -15,7 +15,7 @@ on:
       - 'stl-preview-base/**'
 
 env:
-  GOPRIVATE: github.com/stainless-sdks/luma-agents-go
+  GOPRIVATE: github.com/lumalabs/luma-agents-go,github.com/stainless-sdks/luma-agents-go
 
 jobs:
   lint:
