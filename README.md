@@ -1,8 +1,6 @@
 # Luma CLI
 
-The official CLI for the [Luma REST API](https://luma-agents.stldocs.app).
-
-<!-- x-release-please-start-version -->
+The official CLI for the [Luma REST API](https://docs.agents.lumalabs.ai).
 
 ## Installation
 
@@ -11,7 +9,7 @@ The official CLI for the [Luma REST API](https://luma-agents.stldocs.app).
 To test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.
 
 ```sh
-go install 'github.com/lumalabs/luma-agents-cli/cmd/luma-agents-cli@latest'
+go install 'github.com/stainless-sdks/luma-agents-cli/cmd/luma-agents-cli@latest'
 ```
 
 Once you have run `go install`, the binary is placed in your Go bin directory:
@@ -25,8 +23,6 @@ If commands aren't found after installation, add the Go bin directory to your PA
 # Add to your shell profile (.zshrc, .bashrc, etc.)
 export PATH="$PATH:$(go env GOPATH)/bin"
 ```
-
-<!-- x-release-please-end -->
 
 ### Running Locally
 
