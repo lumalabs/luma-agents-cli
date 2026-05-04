@@ -6,10 +6,10 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/lumalabs/luma-agents-cli/internal/apiquery"
+	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
 	"github.com/lumalabs/luma-agents-go"
 	"github.com/lumalabs/luma-agents-go/option"
-	"github.com/stainless-sdks/luma-agents-cli/internal/apiquery"
-	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
@@ -37,8 +37,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[string]{
 			Name:     "model",
-			Usage:    "Model to use",
-			Default:  "uni-1",
+			Usage:    "Model identifier. `uni-1` is the default tier; `uni-1-max` produces higher-quality output than `uni-1` at a higher per-image price. Both models are available to all accounts — see Pricing for per-image rates.",
 			BodyPath: "model",
 		},
 		&requestflag.Flag[*string]{
