@@ -16,8 +16,8 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/lumalabs/luma-agents-cli/internal/jsonview"
 	"github.com/lumalabs/luma-agents-go/option"
-	"github.com/stainless-sdks/luma-agents-cli/internal/jsonview"
 
 	"github.com/charmbracelet/x/term"
 	"github.com/itchyny/json2yaml"

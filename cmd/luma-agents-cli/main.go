@@ -10,8 +10,8 @@ import (
 	"os"
 	"slices"
 
+	"github.com/lumalabs/luma-agents-cli/pkg/cmd"
 	"github.com/lumalabs/luma-agents-go"
-	"github.com/stainless-sdks/luma-agents-cli/pkg/cmd"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
