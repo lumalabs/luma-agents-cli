@@ -6,10 +6,10 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/lumalabs/luma-agents-cli/internal/apiquery"
+	"github.com/lumalabs/luma-agents-cli/internal/requestflag"
 	"github.com/lumalabs/luma-agents-go"
 	"github.com/lumalabs/luma-agents-go/option"
-	"github.com/stainless-sdks/luma-agents-cli/internal/apiquery"
-	"github.com/stainless-sdks/luma-agents-cli/internal/requestflag"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
