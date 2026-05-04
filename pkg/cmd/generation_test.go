@@ -23,6 +23,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--source", "{data: data, media_type: media_type, url: url}",
 			"--style", "auto",
 			"--type", "image",
+			"--user-id", "user_id",
 			"--web-search=true",
 		)
 	})
@@ -48,6 +49,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--source.url", "url",
 			"--style", "auto",
 			"--type", "image",
+			"--user-id", "user_id",
 			"--web-search=true",
 		)
 	})
@@ -71,6 +73,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"  url: url\n" +
 			"style: auto\n" +
 			"type: image\n" +
+			"user_id: user_id\n" +
 			"web_search: true\n")
 		mocktest.TestRunMockTestWithPipeAndFlags(
 			t, pipeData,
