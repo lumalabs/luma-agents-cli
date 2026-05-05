@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1 (2026-05-05)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* update SDK settings ([96d539b](https://github.com/lumalabs/luma-agents-cli/commit/96d539bfd7bdff40a1db3d46ea5f2da68d5d9201))
+* update SDK settings ([1923f49](https://github.com/lumalabs/luma-agents-cli/commit/1923f49ef118129a9a04a47c6d5bbc4e5616f9d2))
+
+
+### Documentation
+
+* update API documentation URL in README ([9535717](https://github.com/lumalabs/luma-agents-cli/commit/9535717afa9e2e3b6a98e1fe3969c84828c29f61))
+
 ## 0.1.0 (2026-05-04)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.0.1...v0.1.0)

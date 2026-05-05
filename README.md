@@ -1,6 +1,6 @@
 # Luma CLI
 
-The official CLI for the [Luma REST API](https://luma-agents.stldocs.app).
+The official CLI for the [Luma REST API](https://docs.agents.lumalabs.ai).
 
 <!-- x-release-please-start-version -->
 
