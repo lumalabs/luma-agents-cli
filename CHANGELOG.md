@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2 (2026-05-08)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.1...v0.1.2)
+
+### Chores
+
+* **internal:** codegen related update ([09e41a3](https://github.com/lumalabs/luma-agents-cli/commit/09e41a3d33a2f44b6c98e4ebfdf83d62617684d9))
+* redact api-key headers in debug logs ([c4af650](https://github.com/lumalabs/luma-agents-cli/commit/c4af6504aa816b5b2d52221e6049dc0b335f0956))
+
 ## 0.1.1 (2026-05-05)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.0...v0.1.1)
