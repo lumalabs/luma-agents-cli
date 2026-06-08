@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.4 (2026-06-08)
+
+Full Changelog: [v0.1.3...v0.1.4](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.3...v0.1.4)
+
+### Chores
+
+* remove custom code ([28a7c4f](https://github.com/lumalabs/luma-agents-cli/commit/28a7c4ff5914bd8936546dca6a9f297b8ead9ad3))
+
 ## 0.1.3 (2026-05-15)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.2...v0.1.3)
