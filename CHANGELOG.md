@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-06-08)
+
+Full Changelog: [v0.1.4...v0.3.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.4...v0.3.0)
+
+### Features
+
+* **api:** add source_video_id and video params to generations create method ([ce4caf1](https://github.com/lumalabs/luma-agents-cli/commit/ce4caf141591ddbaebe52953de406f7be73fdbe9))
+
 ## 0.1.4 (2026-06-08)
 
 Full Changelog: [v0.1.3...v0.1.4](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.3...v0.1.4)
