@@ -9,7 +9,7 @@ require (
 	github.com/charmbracelet/x/term v0.2.1
 	github.com/goccy/go-yaml v1.18.0
 	github.com/itchyny/json2yaml v0.1.4
-	github.com/lumalabs/luma-agents-go v0.1.1
+	github.com/lumalabs/luma-agents-go v0.1.3
 	github.com/muesli/reflow v0.3.0
 	github.com/stretchr/testify v1.10.0
 	github.com/tidwall/gjson v1.18.0
