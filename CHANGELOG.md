@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 (2026-06-11)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** add keyframe_indexes and keyframes parameters to generations video ([c63a4a3](https://github.com/lumalabs/luma-agents-cli/commit/c63a4a3669ae6c1fcc7d50f7b4f7a3f17168457f))
+
+
+### Chores
+
+* **internal:** codegen related update ([15a6a53](https://github.com/lumalabs/luma-agents-cli/commit/15a6a534b13104bb0bdb0dd9c6114b1bf5d16854))
+
 ## 0.3.0 (2026-06-08)
 
 Full Changelog: [v0.1.4...v0.3.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.4...v0.3.0)

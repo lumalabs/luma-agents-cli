@@ -134,7 +134,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.edit",
-			Usage:      "Ray 3.2 video-to-video edit controls. Only valid under `video.edit` when `type` is `video_edit`.",
+			Usage:      "Ray 3.2 video-to-video edit controls. Only valid under `video.edit` when `type` is `video_edit`. The source video must be 18 seconds or shorter; output duration matches the source.",
 			InnerField: "edit",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -152,6 +152,16 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Generate HDR video. Requires HDR access. Not supported for video_reframe.",
 			InnerField: "hdr",
 		},
+		&requestflag.InnerFlag[any]{
+			Name:       "video.keyframe-indexes",
+			Usage:      "Parallel list of non-negative, unique output-frame positions where each keyframes[i] is anchored, in the duration x 24fps grid (5s -> 0..120, 10s -> 0..240). Must match keyframes in length.",
+			InnerField: "keyframe_indexes",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "video.keyframes",
+			Usage:      "Image-to-video guide frames (type=video only), each pinned to an output-frame position via the parallel keyframe_indexes. 1-64 anchors: a single anchor is a valid start-pinned i2v (an alternate to start_frame), and any count up to 64 places guide frames at arbitrary positions. Unlike start_frame/end_frame (the legacy 2-frame surface), this supports arbitrary positions, 10s durations, and HDR. Mutually exclusive with start_frame / end_frame / loop. Only supported on model ray-3.2. For video-to-video keyframes use video.edit.keyframes on type=video_edit instead.",
+			InnerField: "keyframes",
+		},
 		&requestflag.InnerFlag[*bool]{
 			Name:       "video.loop",
 			Usage:      "Generate a seamlessly looping video. Only valid for type=video; not supported with duration=10s or hdr=true.",
@@ -159,7 +169,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "video.resolution",
-			Usage:      "Ray 3.2 video output resolution. 1080p is public for video generation; video_reframe 1080p is still rolling out and may return a coming-soon validation error until enabled for the caller.",
+			Usage:      "Ray 3.2 video output resolution. 360p is the draft tier (fast, low-cost previews), accepted on type=video, video_edit, and video_reframe; on type=video it is SDR-only (not valid with hdr=true). 1080p is public for video generation; video_reframe 1080p is still rolling out and may return a coming-soon validation error until enabled for the caller.",
 			InnerField: "resolution",
 		},
 		&requestflag.InnerFlag[map[string]any]{
