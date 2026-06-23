@@ -47,7 +47,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[map[string]any]{
 			Name:     "source",
-			Usage:    "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:    "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			BodyPath: "source",
 		},
 		&requestflag.Flag[string]{
@@ -89,6 +89,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			InnerField: "data",
 		},
 		&requestflag.InnerFlag[*string]{
+			Name:       "image-ref.file-id",
+			Usage:      "UUID of a file previously uploaded via POST /files. Skips URL fetch / base64 decode and reuses the file's pre-moderated backing artifact. The referenced file must be owned by the same client and in state=ready. See the Files API for the upload flow.",
+			InnerField: "file_id",
+		},
+		&requestflag.InnerFlag[*string]{
 			Name:       "image-ref.generation-id",
 			Usage:      "UUID of a prior generation owned by the same caller. Used on source for image_edit, video_edit, and video_reframe chaining and on video.start_frame / video.end_frame for video extension.",
 			InnerField: "generation_id",
@@ -109,6 +114,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Name:       "source.data",
 			Usage:      "Base64-encoded image or video data",
 			InnerField: "data",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "source.file-id",
+			Usage:      "UUID of a file previously uploaded via POST /files. Skips URL fetch / base64 decode and reuses the file's pre-moderated backing artifact. The referenced file must be owned by the same client and in state=ready. See the Files API for the upload flow.",
+			InnerField: "file_id",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "source.generation-id",
@@ -139,7 +149,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.end-frame",
-			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			InnerField: "end_frame",
 		},
 		&requestflag.InnerFlag[*bool]{
@@ -179,7 +189,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.start-frame",
-			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			InnerField: "start_frame",
 		},
 	},
