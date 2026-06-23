@@ -17,14 +17,14 @@ func TestGenerationsCreate(t *testing.T) {
 			"generations", "create",
 			"--prompt", "A glass of iced coffee on a marble countertop, morning light streaming through a window",
 			"--aspect-ratio", "3:1",
-			"--image-ref", "{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
+			"--image-ref", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
 			"--model", "uni-1",
 			"--output-format", "png",
-			"--source", "{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
+			"--source", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
 			"--style", "auto",
 			"--type", "image",
 			"--user-id", "user_id",
-			"--video", "{duration: 5s, edit: {auto_controls: true, controls: {depth: {blur: 0, enabled: true}, face: {enabled: true}, normals: {augmentation: 0, enabled: true}, pose: {enabled: true, strength: precise}, trajectory: {enabled: true, sparsity: 0}}, keyframe_indexes: [0], keyframes: [{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], strength: adhere_1}, end_frame: {data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}, exr_export: true, hdr: true, keyframe_indexes: [0], keyframes: [{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], loop: true, resolution: 360p, source_position: {h_norm: 1, w_norm: 1, x_norm: -2, y_norm: -2}, start_frame: {data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}}",
+			"--video", "{duration: 5s, edit: {auto_controls: true, controls: {depth: {blur: 0, enabled: true}, face: {enabled: true}, normals: {augmentation: 0, enabled: true}, pose: {enabled: true, strength: precise}, trajectory: {enabled: true, sparsity: 0}}, keyframe_indexes: [0], keyframes: [{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], strength: adhere_1}, end_frame: {data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}, exr_export: true, hdr: true, keyframe_indexes: [0], keyframes: [{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], loop: true, resolution: 360p, source_position: {h_norm: 1, w_norm: 1, x_norm: -2, y_norm: -2}, start_frame: {data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}}",
 			"--web-search=true",
 		)
 	})
@@ -41,12 +41,14 @@ func TestGenerationsCreate(t *testing.T) {
 			"--prompt", "A glass of iced coffee on a marble countertop, morning light streaming through a window",
 			"--aspect-ratio", "3:1",
 			"--image-ref.data", "data",
+			"--image-ref.file-id", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 			"--image-ref.generation-id", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 			"--image-ref.media-type", "media_type",
 			"--image-ref.url", "url",
 			"--model", "uni-1",
 			"--output-format", "png",
 			"--source.data", "data",
+			"--source.file-id", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 			"--source.generation-id", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 			"--source.media-type", "media_type",
 			"--source.url", "url",
@@ -54,16 +56,16 @@ func TestGenerationsCreate(t *testing.T) {
 			"--type", "image",
 			"--user-id", "user_id",
 			"--video.duration", "5s",
-			"--video.edit", "{auto_controls: true, controls: {depth: {blur: 0, enabled: true}, face: {enabled: true}, normals: {augmentation: 0, enabled: true}, pose: {enabled: true, strength: precise}, trajectory: {enabled: true, sparsity: 0}}, keyframe_indexes: [0], keyframes: [{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], strength: adhere_1}",
-			"--video.end-frame", "{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
+			"--video.edit", "{auto_controls: true, controls: {depth: {blur: 0, enabled: true}, face: {enabled: true}, normals: {augmentation: 0, enabled: true}, pose: {enabled: true, strength: precise}, trajectory: {enabled: true, sparsity: 0}}, keyframe_indexes: [0], keyframes: [{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}], strength: adhere_1}",
+			"--video.end-frame", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
 			"--video.exr-export=true",
 			"--video.hdr=true",
 			"--video.keyframe-indexes", "[0]",
-			"--video.keyframes", "[{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}]",
+			"--video.keyframes", "[{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}]",
 			"--video.loop=true",
 			"--video.resolution", "360p",
 			"--video.source-position", "{h_norm: 1, w_norm: 1, x_norm: -2, y_norm: -2}",
-			"--video.start-frame", "{data: data, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
+			"--video.start-frame", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
 			"--web-search=true",
 		)
 	})
@@ -77,6 +79,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"aspect_ratio: '3:1'\n" +
 			"image_ref:\n" +
 			"  - data: data\n" +
+			"    file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    media_type: media_type\n" +
 			"    url: url\n" +
@@ -84,6 +87,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"output_format: png\n" +
 			"source:\n" +
 			"  data: data\n" +
+			"  file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"  generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"  media_type: media_type\n" +
 			"  url: url\n" +
@@ -113,12 +117,14 @@ func TestGenerationsCreate(t *testing.T) {
 			"      - 0\n" +
 			"    keyframes:\n" +
 			"      - data: data\n" +
+			"        file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"        generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"        media_type: media_type\n" +
 			"        url: url\n" +
 			"    strength: adhere_1\n" +
 			"  end_frame:\n" +
 			"    data: data\n" +
+			"    file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    media_type: media_type\n" +
 			"    url: url\n" +
@@ -128,6 +134,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"    - 0\n" +
 			"  keyframes:\n" +
 			"    - data: data\n" +
+			"      file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"      generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"      media_type: media_type\n" +
 			"      url: url\n" +
@@ -140,6 +147,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"    y_norm: -2\n" +
 			"  start_frame:\n" +
 			"    data: data\n" +
+			"    file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    media_type: media_type\n" +
 			"    url: url\n" +
