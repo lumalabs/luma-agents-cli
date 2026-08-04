@@ -18,6 +18,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--prompt", "A glass of iced coffee on a marble countertop, morning light streaming through a window",
 			"--aspect-ratio", "3:1",
 			"--image-ref", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
+			"--layering", "{resolution: 1k}",
 			"--model", "uni-1",
 			"--output-format", "png",
 			"--source", "{data: data, file_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e, media_type: media_type, url: url}",
@@ -45,6 +46,7 @@ func TestGenerationsCreate(t *testing.T) {
 			"--image-ref.generation-id", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
 			"--image-ref.media-type", "media_type",
 			"--image-ref.url", "url",
+			"--layering.resolution", "1k",
 			"--model", "uni-1",
 			"--output-format", "png",
 			"--source.data", "data",
@@ -83,6 +85,8 @@ func TestGenerationsCreate(t *testing.T) {
 			"    generation_id: 182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e\n" +
 			"    media_type: media_type\n" +
 			"    url: url\n" +
+			"layering:\n" +
+			"  resolution: 1k\n" +
 			"model: uni-1\n" +
 			"output_format: png\n" +
 			"source:\n" +

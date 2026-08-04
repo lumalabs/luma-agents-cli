@@ -35,6 +35,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Usage:    "Reference images for style/content guidance. Up to 9 for type 'image', up to 8 for type 'image_edit'.",
 			BodyPath: "image_ref",
 		},
+		&requestflag.Flag[map[string]any]{
+			Name:     "layering",
+			Usage:    "Layer-extraction options for type=layering (model uni-1). The image to decompose rides body.source; body.prompt optionally guides how to split it (max 500 characters). The server plans the layers automatically before generating.",
+			BodyPath: "layering",
+		},
 		&requestflag.Flag[string]{
 			Name:     "model",
 			Usage:    "Model identifier. `uni-1` is the default image tier; `uni-1-max` produces higher-quality output than `uni-1` at a higher per-image price. `ray-3.2` is the public video model for text-to-video, image-to-video, and video-to-video editing.",
@@ -107,6 +112,13 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Name:       "image-ref.url",
 			Usage:      "Publicly accessible image URL, or a video URL when used as source for video_edit/video_reframe with media_type=video/*.",
 			InnerField: "url",
+		},
+	},
+	"layering": {
+		&requestflag.InnerFlag[string]{
+			Name:       "layering.resolution",
+			Usage:      "Output resolution for every extracted layer. 1k is faster and lower cost; 2k re-renders each layer at higher quality (priced higher, per layer).",
+			InnerField: "resolution",
 		},
 	},
 	"source": {
