@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.4.0 (2026-08-20)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** add files endpoints and file_id support to generations ([a5fde83](https://github.com/lumalabs/luma-agents-cli/commit/a5fde83d98b7d9b1bbd28733e383c8fd216ce16d))
+* **api:** add guide_frame parameter to video generation ([53ba1b6](https://github.com/lumalabs/luma-agents-cli/commit/53ba1b68b134f7c784cafd9efcb86c5570897a04))
+* **api:** add keyframe_indexes and keyframes parameters to generations video ([c63a4a3](https://github.com/lumalabs/luma-agents-cli/commit/c63a4a3669ae6c1fcc7d50f7b4f7a3f17168457f))
+* **api:** add layering parameter to generations create ([b71bf30](https://github.com/lumalabs/luma-agents-cli/commit/b71bf3064b435817dffbaddfaeff20c6709c65a1))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([a8bbbdc](https://github.com/lumalabs/luma-agents-cli/commit/a8bbbdcdb5a0d3473953e22951548036a21dde77))
+
+
+### Chores
+
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([37270b4](https://github.com/lumalabs/luma-agents-cli/commit/37270b4e201fcaaf0819061b1f0a7d14ebd03cf7))
+* **internal:** codegen related update ([4b4eb14](https://github.com/lumalabs/luma-agents-cli/commit/4b4eb147a0387b33a74de19ebf6a7cb49a86f953))
+* **internal:** codegen related update ([bbd3e0a](https://github.com/lumalabs/luma-agents-cli/commit/bbd3e0a3e2afc67f71411ee50d3478cadbbd0653))
+* **internal:** codegen related update ([15a6a53](https://github.com/lumalabs/luma-agents-cli/commit/15a6a534b13104bb0bdb0dd9c6114b1bf5d16854))
+
 ## 0.3.0 (2026-06-08)
 
 Full Changelog: [v0.1.4...v0.3.0](https://github.com/lumalabs/luma-agents-cli/compare/v0.1.4...v0.3.0)

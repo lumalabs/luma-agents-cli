@@ -35,6 +35,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Usage:    "Reference images for style/content guidance. Up to 9 for type 'image', up to 8 for type 'image_edit'.",
 			BodyPath: "image_ref",
 		},
+		&requestflag.Flag[map[string]any]{
+			Name:     "layering",
+			Usage:    "Layer-extraction options for type=layering (model uni-1). The image to decompose rides body.source; body.prompt optionally guides how to split it (max 500 characters). The server plans the layers automatically before generating.",
+			BodyPath: "layering",
+		},
 		&requestflag.Flag[string]{
 			Name:     "model",
 			Usage:    "Model identifier. `uni-1` is the default image tier; `uni-1-max` produces higher-quality output than `uni-1` at a higher per-image price. `ray-3.2` is the public video model for text-to-video, image-to-video, and video-to-video editing.",
@@ -47,7 +52,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[map[string]any]{
 			Name:     "source",
-			Usage:    "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:    "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			BodyPath: "source",
 		},
 		&requestflag.Flag[string]{
@@ -89,6 +94,11 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			InnerField: "data",
 		},
 		&requestflag.InnerFlag[*string]{
+			Name:       "image-ref.file-id",
+			Usage:      "UUID of a file previously uploaded via POST /files. Skips URL fetch / base64 decode and reuses the file's pre-moderated backing artifact. The referenced file must be owned by the same client and in state=ready. See the Files API for the upload flow.",
+			InnerField: "file_id",
+		},
+		&requestflag.InnerFlag[*string]{
 			Name:       "image-ref.generation-id",
 			Usage:      "UUID of a prior generation owned by the same caller. Used on source for image_edit, video_edit, and video_reframe chaining and on video.start_frame / video.end_frame for video extension.",
 			InnerField: "generation_id",
@@ -104,11 +114,23 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			InnerField: "url",
 		},
 	},
+	"layering": {
+		&requestflag.InnerFlag[string]{
+			Name:       "layering.resolution",
+			Usage:      "Output resolution for every extracted layer. 1k is faster and lower cost; 2k re-renders each layer at higher quality (priced higher, per layer).",
+			InnerField: "resolution",
+		},
+	},
 	"source": {
 		&requestflag.InnerFlag[*string]{
 			Name:       "source.data",
 			Usage:      "Base64-encoded image or video data",
 			InnerField: "data",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "source.file-id",
+			Usage:      "UUID of a file previously uploaded via POST /files. Skips URL fetch / base64 decode and reuses the file's pre-moderated backing artifact. The referenced file must be owned by the same client and in state=ready. See the Files API for the upload flow.",
+			InnerField: "file_id",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "source.generation-id",
@@ -134,12 +156,12 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.edit",
-			Usage:      "Ray 3.2 video-to-video edit controls. Only valid under `video.edit` when `type` is `video_edit`.",
+			Usage:      "Ray 3.2 video-to-video edit controls. Only valid under `video.edit` when `type` is `video_edit`. The source video must be 18 seconds or shorter; output duration matches the source.",
 			InnerField: "edit",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.end-frame",
-			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			InnerField: "end_frame",
 		},
 		&requestflag.InnerFlag[*bool]{
@@ -147,10 +169,25 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Export EXR alongside the MP4. Requires hdr=true.",
 			InnerField: "exr_export",
 		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "video.guide-frame",
+			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
+			InnerField: "guide_frame",
+		},
 		&requestflag.InnerFlag[*bool]{
 			Name:       "video.hdr",
 			Usage:      "Generate HDR video. Requires HDR access. Not supported for video_reframe.",
 			InnerField: "hdr",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "video.keyframe-indexes",
+			Usage:      "Parallel list of non-negative, unique output-frame positions where each keyframes[i] is anchored, in the duration x 24fps grid (5s -> 0..120, 10s -> 0..240). Must match keyframes in length.",
+			InnerField: "keyframe_indexes",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "video.keyframes",
+			Usage:      "Image-to-video guide frames (type=video only), each pinned to an output-frame position via the parallel keyframe_indexes. 1-64 anchors: a single anchor is a valid start-pinned i2v (an alternate to start_frame), and any count up to 64 places guide frames at arbitrary positions. Unlike start_frame/end_frame (the legacy 2-frame surface), this supports arbitrary positions, 10s durations, and HDR. Mutually exclusive with start_frame / end_frame / loop. Only supported on model ray-3.2. For video-to-video keyframes use video.edit.keyframes on type=video_edit instead.",
+			InnerField: "keyframes",
 		},
 		&requestflag.InnerFlag[*bool]{
 			Name:       "video.loop",
@@ -159,7 +196,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "video.resolution",
-			Usage:      "Ray 3.2 video output resolution. 1080p is public for video generation; video_reframe 1080p is still rolling out and may return a coming-soon validation error until enabled for the caller.",
+			Usage:      "Ray 3.2 video output resolution. 360p is the draft tier (fast, low-cost previews), accepted on type=video, video_edit, and video_reframe; on type=video it is SDR-only (not valid with hdr=true). 1080p is public for video generation; video_reframe 1080p is still rolling out and may return a coming-soon validation error until enabled for the caller.",
 			InnerField: "resolution",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -169,7 +206,7 @@ var generationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "video.start-frame",
-			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, or generation_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension.",
+			Usage:      "Media reference for guided generation. Provide exactly one of url, inline base64 data, generation_id, or file_id. URL/data references accept image media at image positions; video_edit and video_reframe sources also accept source.url or source.data when source.media_type is a video/* MIME. generation_id chains image_edit off a prior image output, video_edit/video_reframe off a prior video output, and video.start_frame/end_frame for extension. file_id references a file previously uploaded via POST /files — see the Files API.",
 			InnerField: "start_frame",
 		},
 	},
