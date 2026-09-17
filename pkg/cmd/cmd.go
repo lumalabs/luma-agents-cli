@@ -94,6 +94,18 @@ func init() {
 				},
 			},
 			{
+				Name:     "files",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&filesCreate,
+					&filesList,
+					&filesDelete,
+					&filesComplete,
+					&filesGet,
+				},
+			},
+			{
 				Name:            "@manpages",
 				Usage:           "Generate documentation for 'man'",
 				UsageText:       "luma-agents-cli @manpages [-o luma-agents-cli.1] [--gzip]",
